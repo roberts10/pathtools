@@ -1,0 +1,47 @@
+{% block body_block %}
+
+{% if records %}
+
+Number of results: {{number}} </br></br>
+
+<table class="table">
+
+
+    {% for record in records %}
+
+    <thead class="thead-light">
+        <tr class="table-active">
+            <th scope="col"> {{record.case_id}} </th>
+            <th scope="col"> {{record.age}} </th>
+            <th scope="col"> {{record.sex}} </th>
+            <th align="left" scope="col"> {{record.staff}} </th>
+        </tr>
+    </thead>
+    <tbody>
+                <tr>
+    <td align="left" colspan="5"> {{record.text|safe|linebreaksbr}}  </td> </tr>
+        </tr>
+        <tr>
+    <td align="left" colspan="5"> <h5>Synoptic: </h5> {{record.synoptic|safe|linebreaksbr}}  </td> </tr>
+        </tr>
+        <tr>
+            <td align="left" colspan="5"> <h5>Clinical:</h5> {{record.clinical|safe|linebreaksbr}}  </td> </tr>
+        </tr>
+        <tr>
+            <td align="left" colspan="5"> <h5>Intraoperative: </h5> {{record.intraoperative|safe|linebreaksbr}}  </td> </tr>
+        </tr>
+        <tr>
+            <td align="left" colspan="5"> <h5>Gross: </h5> {{record.gross|safe|linebreaksbr}}  </td> </tr>
+        </tr>
+    </tbody>
+
+    {% endfor %}
+</table>
+
+{% else %}
+    There are no records to display
+
+{% endif %}
+
+{% endblock %}
+

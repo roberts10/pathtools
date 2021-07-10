@@ -1,0 +1,130 @@
+{% extends 'dx_search/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+
+<h4> New Requests </h4>
+
+<table class="table">
+
+
+    <thead class="thead-light">
+     <tr class="table-active">
+            <th scope="col"> Query ID</th>
+            <th scope="col"> Request Date </th>
+            <th scope="col"> Type </th>
+            <th scope="col"> Username</th>
+            <th scope="col"> Email </th>
+    </tr>
+    </thead>
+
+    {% for query in new_queries %}
+    <tbody>
+        <tr>
+            <td scope="col"> <a href="{% url 'query_manager' query_id=query.id %}"> {{query.id}} </a> </td> 
+            <td scope="col"> {{query.request_datetime}} </td>
+            <td scope="col"> {{query.request_type}} </td>
+            <td scope="col"> {{query.user_last_name}} </td>
+            <td scope="col"> {{query.user_email}} </td>
+
+    </tbody>
+
+    {% endfor %}
+</table> </br>
+
+
+<h4> Pending Requests </h4>
+
+<table class="table">
+
+    <thead class="thead-light">
+     <tr class="table-active">
+            <th scope="col"> Query ID</th>
+            <th scope="col"> Request Date </th>
+            <th scope="col"> Username</th>
+            <th scope="col"> Email </th>
+            <th scope="col"> Made Pending at </th>
+            <th scope="col"> Analyst </th>
+
+    </tr>
+    </thead>
+
+    {% for query in pending_queries %}
+    <tbody>
+        <tr>
+            <td scope="col"> <a href="{% url 'query_manager' query_id=query.id %}"> {{query.id}} </a> </td> 
+            <td scope="col"> {{query.request_datetime}} </td>
+            <td scope="col"> {{query.user_last_name}} </td>
+            <td scope="col"> {{query.user_email}} </td>
+            <td scope="col"> {{query.execute_datetime}} </td>
+            <td scope="col"> {{query.execute_user}} </td>
+
+
+    </tbody>
+
+    {% endfor %}
+</table></br>
+
+<h4> Completed Requests </h4>
+
+<table class="table">
+
+    <thead class="thead-light">
+     <tr class="table-active">
+            <th scope="col"> Query ID</th>
+            <th scope="col"> Request Date </th>
+            <th scope="col"> Username</th>
+            <th scope="col"> Email </th>
+            <th scope="col"> Processed at </th>
+            <th scope="col"> Analyst </th>
+
+    </tr>
+    </thead>
+
+    {% for query in completed_queries %}
+    <tbody>
+        <tr>
+            <td scope="col"> <a href="{% url 'query_manager' query_id=query.id %}"> {{query.id}} </a> </td> 
+            <td scope="col"> {{query.request_datetime}} </td>
+            <td scope="col"> {{query.user_last_name}} </td>
+            <td scope="col"> {{query.user_email}} </td>
+            <td scope="col"> {{query.execute_datetime}} </td>
+            <td scope="col"> {{query.execute_user}} </td>
+
+
+    </tbody>
+
+    {% endfor %}
+</table>
+
+<h4> Rejected Requests </h4>
+
+<table class="table">
+
+    <thead class="thead-light">
+     <tr class="table-active">
+            <th scope="col"> Query ID</th>
+            <th scope="col"> Request Date </th>
+            <th scope="col"> Username</th>
+            <th scope="col"> Email </th>
+            <th scope="col"> Processed at </th>
+            <th scope="col"> Analyst </th>
+
+    </tr>
+    </thead>
+
+    {% for query in rejected_queries %}
+    <tbody>
+        <tr>
+            <td scope="col"> <a href="{% url 'query_manager' query_id=query.id %}"> {{query.id}} </a> </td> 
+            <td scope="col"> {{query.request_datetime}} </td>
+            <td scope="col"> {{query.user_last_name}} </td>
+            <td scope="col"> {{query.user_email}} </td>
+            <td scope="col"> {{query.execute_datetime}} </td>
+            <td scope="col"> {{query.execute_user}} </td>
+
+
+    </tbody>
+
+    {% endfor %}
+</table>
+{% endblock %}

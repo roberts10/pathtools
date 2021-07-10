@@ -1,0 +1,41 @@
+{% extends 'dx_search/base.html' %} {% load staticfiles %}
+{% block body_block %}
+{#  #}
+{# {% if loaded_case_set %} #}
+{#  #}
+{# <h4> Loaded Case Set:</h4>  #}
+{# ID: {{loaded_case_set.id}} </br> #}
+{# Name: {{loaded_case_set.name}} </br> #}
+{# Size: {{loaded_case_set.cases.count}} </br> #}
+{#  #}
+{# {% endif %} #}
+
+<table class="table">
+
+
+    <thead class="thead-light">
+     <tr class="table-active">
+            <th scope="col"> Case Set ID</th>
+            <th scope="col"> Case Set Name</th>
+            <th scope="col"> Creation Date</th>
+            <th scope="col"> Number of Cases</th>
+    </tr>
+    </thead>
+
+    {% for case_set in user_case_set %}
+    <tbody>
+        <tr>
+            <td scope="col"> <a href="{% url 'case_set_instance_manager' case_set_id=case_set.id %}"> {{case_set.id}} </a> </td> 
+            <td scope="col"> {{case_set.name}} </td>
+            <td scope="col"> {{case_set.create_datetime}} </td>
+            <td scope="col"> {{case_set.cases.count}} </td>
+
+
+    </tbody>
+
+    {% endfor %}
+</table> </br>
+
+
+
+{% endblock %}

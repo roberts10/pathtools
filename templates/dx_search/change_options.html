@@ -1,0 +1,13 @@
+{% extends 'dx_search/base.html' %} {% load staticfiles %}
+{% block body_block %}
+
+<form id="options_form" method="post" action="{% url 'change_options' query_id=query.id %}" enctype="multipart/form-data" 
+
+    {% csrf_token %}
+
+    {{options_form.as_ul}}
+
+    <input type="submit" name="submit" value="SUBMIT REQUEST" />
+</form>
+
+{% endblock %}

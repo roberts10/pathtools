@@ -1,0 +1,56 @@
+{% extends 'dx_search/base.html' %} {% load staticfiles %}
+{% block body_block %}
+
+
+<h4> Found {{case_set.cases.count}} matching cases in Pathtools</h4> </br>
+
+{% if output_MRN_size %}
+
+<h4> From {{output_MRN_size}} unique patients </br> </br>
+
+{% endif %}
+
+{% if output_patient_size %}
+
+<h4> From {{output_patient_size}} unique patients </br> </br>
+
+{% endif %}
+
+<h4> Case Set Details: </h4> 
+<ul>
+    <li> Case Set ID: {{case_set.id}} </li>
+
+    <li> Case Set Name: {{case_set.name}} </li>
+    <li> Date Created: {{case_set.create_datetime}} </li>
+    <li> Number of Cases: {{case_set.cases.count}} </li>
+    
+</ul>
+
+{% if set_difference %}
+
+{% if set_size != 0 %}
+
+<h4> Could not locate {{set_size}} in Pathtools:  </h4> </br>
+
+<ul>
+{% for case in set_difference %}
+<li>{{case}}</li)
+</ul>
+
+{% endfor %}
+
+{% endif %}
+
+{% endif %}
+
+</br>
+</br>
+
+<h5> <a href="{% url 'delete_case_set' case_set_id=case_set.id  %}"> DELETE Case Set and Try Again</a>   </br> </br>
+
+<a href="{% url 'case_set_dashboard' %}"> SAVE Case Set </a>  
+
+</h5>
+
+
+{% endblock %}

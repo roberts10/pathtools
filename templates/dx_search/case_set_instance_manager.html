@@ -1,0 +1,30 @@
+{% extends 'dx_search/base.html' %} {% load staticfiles %}
+{% block body_block %}
+
+<h4> Case Set Details: </h4> 
+<ul>
+    <li> Case Set ID: {{case_set.id}} </li>
+
+    <li> Case Set Name: {{case_set.name}} </li>
+    <li> Date Created: {{case_set.create_datetime}} </li>
+    <li> Number of Cases: {{case_set.cases.count}} </li>
+    
+</ul>
+
+<h4> <a href="{% url 'load_case_set_to_memory' case_set_id=case_set.id %}"> Search Against Case Set</a>  </h4> </br>
+
+<h4> <a href="{% url 'download_request' case_set_id=case_set.id %}"> Request Data Download </a>  </h4> </br>
+
+<h4> <a href="{% url 'patient_case_id_history_search' case_set_id=case_set.id %}"> Create Case Set of all Patient Associated Cases</a>  </h4> </br>
+
+<h4> <a href="{% url 'delete_case_set_goto_dashboard' case_set_id=case_set.id %}"> DELETE Case Set</a>  </h4> </br>
+
+<h4> Case List </h4> </br>
+
+{% for case in case_set.cases.all %}
+
+{{case.case_id}}</br>
+
+{% endfor %}
+
+{% endblock %}

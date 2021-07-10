@@ -1,0 +1,65 @@
+{% extends 'dx_search/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+
+<!-- Load CSS for QueryBuilder -->
+<link href="{% static 'jQuery-QueryBuilder/dist/css/query-builder.default.min.css' %}" rel="stylesheet">
+
+<style>
+p {text-align: right;}
+.table-bordered>tbody>tr:nth-child(odd)>td{
+    background-color:#D3D3D3;
+    }
+mark {
+    background-color: yellow;
+        color: black;
+    }
+</style>
+
+<section class="bs-docs-section clearfix">
+  <div class="col-md-12 col-lg-10 col-lg-offset-1">
+      
+    <div id="builder-basic"></div>
+
+    <div class="btn-group">
+    {% comment %}
+      <button class="btn btn-default format " data-target="basic">Format</button>
+    {% endcomment %}
+      <button class="btn btn-warning reload" >Reload</button>
+        <button class="btn btn-primary five_thousand" data-target="basic"> SEARCH PREVIEW </button>
+    <div class="toggle_container" style="display:none">
+        <button class="btn btn-danger download_case_finding" data-target="basic">DOWNLOAD</div>
+    </div>
+  </div>
+  </div>
+</section>
+<div id="query"><h2> </h2></div>
+</br>
+{# <div id="formatted_string"> #}
+{#  #}
+{# </div> #}
+<div id="result" >
+<h5>
+<ul>
+<li> 
+   Dates should be in the following format for best resutls: YYYY-MM-DD  
+</li>
+<li>
+Fast_Query displays the final, comment and addendum text, along with basic case info (accession number, patient age, patient sex, assigned staff). 
+</li>
+    <li>
+Research_Query displays additional fields, like synoptic data, clinical data and intraoperative diagnosis. 
+    </li>
+</ul>
+</h5>
+
+
+    </div>
+	
+<!-- Load QueryBuilder and .js file to confire it for VA use -->
+<script src="{% static 'jQuery-QueryBuilder/dist/js/query-builder.standalone.ext.js' %}"></script>
+<script src="{% static 'js/rules.js' %}?rev07073021"></script>
+<script src="{% static 'js/query_build.js' %}?rev07072021"></script>
+
+<script src="https://unpkg.com/moment"</script> 
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'dx_search/base.html' %} {% load staticfiles %}
+{% block body_block %}
+
+<h4> Instructions regarding data download requests </h4>
+
+<ul>
+
+</li>
+<li> Only select the minimal data elements needed for your project, do not request patient identifying information unless needed (i.e. name, DOB, MRN).
+</li>
+
+<li>For IRB-approved research, only request fields containing Protected Health Information (PHI) for download which are covered by your IRB protocol. 
+</li>
+
+<li>For IRB-approved research, upload your IRB-stamped data collection sheet pdf (look in "Approved Documents" tab in IRB Webkit) 
+</li>
+<li> For "Not Research" (formerly "Case Finding") search requests, the investigator does not need to document IRB approval/exemption. 
+</ul>
+
+<h4> You are signed in as user: <bold> {{user}} </bold> </h4> </br>
+
+<h4> Case Set Details: </h4> 
+<ul>
+    <li> Case Set ID: {{case_set.id}} </li>
+
+    <li> Case Set Name: {{case_set.name}} </li>
+    <li> Date Created: {{case_set.create_datetime}} </li>
+    <li> Number of Cases: {{case_set.cases.count}} </li>
+
+</ul>
+<form id="options_form" method="post" action="{% url 'download_request' case_set_id=case_set.id %}" enctype="multipart/form-data" 
+   onsubmit="return confirm(' By submitting this form, you confirm that you understand that the use of this registry/database is a clinical research activity subject to IRB review and approval. By accessing this registry/database, you accept responsibility for using the data herein only as prescribed by the Principal Investigator of the identified study related to the request and IRB and you will immediately report to the Principal Investigator and IRB any unapproved uses of the data and/or problems which involve risks to the data subjects (including risks related to a loss of privacy).You understands that you are responsible for protecting the rights and welfare of data subjects, whose data is contained in the registry/database, including rights of confidentiality and privacy. You attest that you are familiar with ethical principles of human subject research, applicable federal regulations, and IRB policies related to your use of the data within the registry/database. If the data herein is provided to other CCF employees, you will notify them of the obligations herein, including those related to use, non-use and disclosure of the data, prior to providing them the data. Data from the registry/database will not be removed from CCF’s premises or otherwise disclosed to any third parties without first obtaining permission from the Principal Investigator of the identified study related to the request and an appropriate data transfer agreement, which has been fully executed.');">
+
+    {% csrf_token %}
+
+    {{download_form.as_ul}}
+
+    <input type="submit" name="submit" value="SUBMIT REQUEST" />
+</form>
+
+
+{% endblock %}

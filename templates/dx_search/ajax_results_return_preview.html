@@ -1,0 +1,52 @@
+{% block body_block %}
+
+{% if records %}
+
+Number of results: {{number}} </br></br>
+
+<table class="table">
+
+
+    {% for record in records %}
+
+    <thead class="thead-light">
+        <tr class="table-active">
+            {# <th scope="col"> SXX-XXXXX </th> #}
+            <th scope="col"> {{record.case_id}} </th>
+            <th scope="col"> {{record.age}} </th>
+            <th scope="col"> {{record.sex}} </th>
+            {# <th scope="col"> Oct XX, XXXX </th> #}
+            <th align="left" scope="col"> {{record.staff}} </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+    <td align="left" colspan="4"> {{record.text|safe|linebreaksbr}}  </td> </tr>
+        </tr>
+    </tbody>
+
+    {% endfor %}
+</table>
+
+{% else %}
+    There are no records to display
+
+{% comment %}
+
+## Older version.
+
+    <table class="table table-striped">
+
+    {% for record in records %}
+    <tr> <td> {{record.0}}  </td> <td> {{record.1}} </td> <td> {{record.2}}</td> <td>  </td> </tr> <tr> <td align="left" colspan="4"> {{record.3|safe|linebreaksbr}}  </td> </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    There are no records to display
+
+
+{% endcomment %}
+{% endif %}
+
+{% endblock %}
+

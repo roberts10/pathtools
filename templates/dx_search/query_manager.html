@@ -1,0 +1,73 @@
+{% extends 'dx_search/base.html' %} {% load staticfiles %}
+{% block body_block %}
+
+<h4> Query Details: </h4> 
+<ul>
+    <li> Query ID: {{query.id}} </li>
+    <li> User ID: {{query.username}} </li>
+    <li> User Name: {{query.user_last_name}}, {{query.user_first_name}} </li> 
+    <li> Email: {{query.user_email}} </li>
+    <li> Query: {{query.query}} </li>
+    
+    {% if query.collection_sheet %}
+
+    <li> IRB Collection Sheet: <a href="{{query.collection_sheet.url}}">{{query.collection_sheet.url}}</a></li> 
+
+    {% endif %}
+
+    <li> Request Type: {{query.request_type}} </li>
+</ul>
+</br>
+<h4>  Protected Health Information (PHI) Fields Requested: </h4>
+<ul>
+    <li> Name:            {{query.name}} </li>
+    <li> MRN:            {{query.MRN}} </li>
+    <li> DOB:            {{query.DOB}} </li>
+    <li> Sex:            {{query.sex}} </li>
+    <li> Age:            {{query.age}} </li>
+    <li> Service Date: {{query.date}} </li>
+    <li> Accession Number: {{query.accession_number}} </li>
+    <li> Clinical Information:  {{query.clinical}} </li>
+    <li> Gross Description: {{query.gross}} </li>
+    <li> Diagnostic Text: {{query.text}} </li>
+
+</ul></br>
+
+<h2> <a href="{% url 'execute_search_for_download' query_id=query.id %}"> Execute Search </a> <--------- </h2> </br>
+
+<h5> <a href="{% url 'reject_request' query_id=query.id %}"> Reject Request </a> </h5> </br>
+
+<h5> <a href="{% url 'pending_request' query_id=query.id  %}"> Change status to Pending </a> </h5> </br>
+
+<h5> <a href="{% url 'change_options' query_id=query.id  %}"> Change Options</a> </h5> </br>
+
+<hr>
+
+<h4> Notes: </h4>
+
+{{query.notes|linebreaks}}
+
+</br>
+<h4> Manually Add  A Note </h4>
+<form action="{% url 'download_request_instance_manager' query_id=query.id %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type='submit' value="Submit">
+</form>
+</br>
+
+
+{# {% if query.completed == True %} #}
+{# <h4> Last Executed: </br></br> </h4> #}
+{# Analyst: {{query.execute_user}} </br> #}
+{# Timestamp: {{query.execute_datetime}} </br> #}
+{# {% endif %} #}
+{#  #}
+{#  #}
+{# {% if query.rejected == True  %} #}
+{# <h4>  Rejected By: </br></br> </h4> #}
+{# Analyst: {{query.execute_user}} </br> #}
+{# Timestamp: {{query.execute_datetime}} </br> #}
+{# {% endif %} #}
+
+{% endblock %}

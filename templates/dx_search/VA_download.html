@@ -1,0 +1,69 @@
+{% extends 'dx_search/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+
+{% if loaded_case_set %}
+
+<h4> Loaded Case Set:</h4> 
+ID: {{loaded_case_set.id}} </br>
+Name: {{loaded_case_set.name}} </br>
+Size: {{loaded_case_set.cases.count}} </br>
+
+ <a href="{% url 'clear_loaded_case_set' %}"> Clear Loaded Case Set</a>  </br>
+
+{% endif %}
+
+<!-- Load CSS for QueryBuilder -->
+<link href="{% static 'jQuery-QueryBuilder/dist/css/query-builder.default.min.css' %}" rel="stylesheet">
+
+<style>
+p {text-align: right;}
+.table-bordered>tbody>tr:nth-child(odd)>td{
+    background-color:#D3D3D3;
+    }
+mark {
+    background-color: yellow;
+        color: black;
+    }
+</style>
+
+<section class="bs-docs-section clearfix">
+  <div class="col-md-12 col-lg-10 col-lg-offset-1">
+      
+    <div id="builder-basic"></div>
+
+    <div class="btn-group">
+    {% comment %}
+      <button class="btn btn-default format " data-target="basic">Format</button>
+    {% endcomment %}
+      <button class="btn btn-warning reload" >Reload</button>
+        <button class="btn btn-primary five_thousand" data-target="basic"> SEARCH PREVIEW </button>
+    <div class="toggle_container" style="display:none">
+        <button class="btn btn-danger download" data-target="basic">CAPTURE CASES</div>
+    </div>
+  </div>
+  </div>
+</section>
+<div id="query"><h2> </h2></div>
+</br>
+{# <div id="formatted_string"> #}
+{#  #}
+{# </div> #}
+<div id="result" >
+    <h5> 
+        Requests for download MUST include a date range.</br>
+    
+   Dates should be in the following format for best resutls: YYYY-MM-DD  
+    </br>
+    Downloads are currently limited to 5000 cases per request. 
+
+    </h5>
+
+    </div>
+	
+<!-- Load QueryBuilder and .js file to confire it for VA use -->
+<script src="{% static 'jQuery-QueryBuilder/dist/js/query-builder.standalone.ext.js' %}"></script>
+<script src="{% static 'js/rules.js' %}?rev07072021"></script>
+<script src="{% static 'js/query_build.js' %}?rev07072021"></script>
+<script src="https://unpkg.com/moment"</script> 
+{% endblock %}

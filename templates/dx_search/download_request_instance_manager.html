@@ -1,0 +1,86 @@
+{% extends 'dx_search/base.html' %} {% load staticfiles %}
+{% block body_block %}
+
+<h4> Query Details: </h4> 
+<ul>
+    <li> Query ID: {{query.id}} </li>
+    <li> User ID: {{query.user.username}} </li>
+    <li> User Name: {{query.user.last_name}}, {{query.user.first_name}} </li> 
+    <li> Email: {{query.user.email}} </li>
+    </br>
+
+</ul>
+
+{% if query.analyst_request %}
+<h4> If Analyst Request: </h4> 
+
+<ul>
+    <li> User Name: {{query.requestor_last_name}}, {{query.requestor_first_name}} </li> 
+    <li> Email: {{query.requestor_email}} </li>
+    </br>
+
+</ul>
+
+{% endif %}
+
+<h4> Case Set Details: </h4> 
+
+<ul>
+    <li> Case Set ID: {{query.case_set.id}} </li>
+
+    <li> Case Set Name: {{query.case_set.name}} </li>
+    <li> Date Created: {{query.case_set.create_datetime}} </li>
+    <li> Number of Cases: {{query.case_set.cases.count}} </li>
+    
+</ul>
+
+    {% if query.collection_sheet %}
+
+    <li> IRB Collection Sheet: <a href="{{query.collection_sheet.url}}">{{query.collection_sheet.url}}</a></li> 
+
+    {% endif %}
+
+</ul>
+</br>
+<h4>  Protected Health Information (PHI) Fields Requested: </h4>
+<ul>
+    <li> First Name:            {{query.first_name}} </li>
+    <li> Last Name:            {{query.last_name}} </li>
+    <li> MRN:            {{query.MRN}} </li>
+    <li> DOB:            {{query.DOB}} </li>
+    <li> Sex:            {{query.sex}} </li>
+    <li> Age:            {{query.age}} </li>
+    <li> Service Date: {{query.date}} </li>
+    <li> Accession Number: {{query.accession_number}} </li>
+    <li> Clinical Information:  {{query.clinical}} </li>
+    <li> Gross Description: {{query.gross}} </li>
+    <li> Diagnostic Text: {{query.text}} </li>
+    <li> Synoptic: {{query.synoptic}} </li>
+    <li> Intraoperative Diagnosis: {{query.intraoperative}} </li>
+
+</ul></br>
+
+<h2> <a href="{% url 'execute_download' query_id=query.id %}"> Execute Search </a> <--------- </h2> </br>
+
+<h5> <a href="{% url 'reject_request' query_id=query.id %}"> Reject Request </a> </h5> </br>
+
+<h5> <a href="{% url 'pending_request' query_id=query.id  %}"> Change status to Pending </a> </h5> </br>
+
+<h5> <a href="{% url 'change_options' query_id=query.id  %}"> Change Options</a> </h5> </br>
+
+<hr>
+
+<h4> Notes: </h4>
+
+{{query.notes|linebreaks}}
+
+</br>
+<h4> Manually Add  A Note </h4>
+<form action="{% url 'download_request_instance_manager' query_id=query.id %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type='submit' value="Submit">
+</form>
+</br>
+
+{% endblock %}

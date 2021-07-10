@@ -1,0 +1,43 @@
+{% extends 'dx_search/base.html' %}
+
+{% block body_block %}
+
+</br>
+</br>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr class="table-active">
+            <th scope="col"> Year </th>
+            <th scope="col"> Searchable Cases </th>
+        </tr>
+    </thead>
+    {% for line in year_metadata %}
+        <tr >
+            <td > {{line.0}} </td>
+            <td > {{line.1}} </td>
+        </tr>
+    {% endfor %}
+    <tr class="table-active">
+        <td > Total </td >
+        <td > {{total}} </td> 
+    </tr>
+</table>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr class="table-active">
+            <th scope="col"> Staff </th>
+            <th scope="col"> Searchable Cases </th>
+        </tr>
+    </thead>
+    {% for line in staff_metadata %}
+        <tr >
+            <td > {{line.0}} </td>
+            <td > {{line.1}} </td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

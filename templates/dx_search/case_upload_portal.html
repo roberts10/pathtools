@@ -1,0 +1,48 @@
+{% extends 'dx_search/base.html' %} {% load staticfiles %}
+{% block body_block %}
+
+<form id="case_search_submission_form" method="post" action="{% url 'case_upload_portal' %}" enctype="multipart/form-data" >
+
+    {% csrf_token %}
+
+    {{submission_form.as_ul}}
+
+    <input type="submit" name="submit_file" value="Submit" />
+</form>
+
+    </br>
+
+    <a href='/static/upload_portal_instruction.pptx'> CASE UPLOAD INSTRUCTIONS </a>
+
+</p>
+
+<h4> NOTE: </h4> </br>
+Searching by MRN may not capture all patient-associated cases. </br>
+This is because patients often have multiple MRNs across the CCF system. </br>
+Each Pathtools case is only associated with one of these MRNs. </br> </br>
+
+Use "Name and DOB" for the most comprehensive search of patient-associated cases.  </br>
+
+</p>
+
+<div id='message_div' class='hidden'>
+
+<h4> Creating Case Set ... </h4> </br>
+
+This is a processor intensive process.
+Please allow approximately 1 min per 1000 cases in your set.
+
+</div>
+
+<script>
+$('#message_div').hide();
+
+$("form").submit(function(){
+    $('#message_div').show()
+});
+
+</script>
+
+
+
+{% endblock %}

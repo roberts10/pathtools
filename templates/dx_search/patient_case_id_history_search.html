@@ -1,0 +1,33 @@
+{% extends 'dx_search/base.html' %} {% load staticfiles %}
+{% block body_block %}
+
+<form id="name_entry_form" method="post" action="{% url 'patient_case_id_history_search' case_set_id=case_set_input.id %}" enctype="multipart/form-data" >
+
+    {% csrf_token %}
+
+    {{name_entry_form.as_ul}}
+
+    <input type="submit" id='submit' name="submit_file" value="Save" />
+</form>
+
+</br>
+
+<div id='message_div' class='hidden'>
+
+<h4> Creating Case Set ... </h4> </br>
+
+This is a processor intensive process.
+Please allow approximately 1 min per 1000 cases in your set.
+
+</div>
+
+<script>
+$('#message_div').hide();
+
+$("form").submit(function(){
+    $('#message_div').show()
+});
+
+</script>
+
+{% endblock %}

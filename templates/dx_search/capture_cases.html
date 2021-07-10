@@ -1,0 +1,50 @@
+{% extends 'dx_search/base.html' %} {% load staticfiles %}
+{% block body_block %}
+
+<form id="name_entry_form" method="post" action="{% url 'capture_cases' %}" enctype="multipart/form-data" >
+
+    {% csrf_token %}
+
+    {{name_entry_form.as_ul}}
+
+    <input type="submit" name="submit_file" value="Save" />
+</form>
+
+</br>
+
+<div id='message_div' class='hidden'>
+
+<h4> Creating Case Set ... </h4> </br>
+
+This is a processor intensive process.
+Please allow approximately 1 min per 1000 cases in your set.
+
+</div>
+
+<script>
+$('#message_div').hide();
+
+$("form").submit(function(){
+    $('#message_div').show()
+});
+
+</script>
+
+{% if case_set %}
+
+<h4> CASE SET SAVED </h4> </br>
+
+<h4> Case Set Details: </h4> 
+<ul>
+    <li> Case Set ID: {{case_set.id}} </li>
+
+    <li> Case Set Name: {{case_set.name}} </li>
+    <li> Number of Cases: {{case_set.cases.count}} </li>
+    
+</ul>
+
+<h4> <a href="{% url 'case_set_dashboard'  %}"> Go To Case Set Dashboard</a>  </h4> </br>
+
+{% endif %}
+
+{% endblock %}
