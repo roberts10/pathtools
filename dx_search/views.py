@@ -31,6 +31,8 @@ DRIVER = 'ODBC Driver 17 for SQL Server'
 DATABASE = 'Pathtools'
 # New Production server (as of 4/2/2020)
 
+SERVER = os.environ.get("SERVER")
+
 server = 'pathtools.ccf.org'
 
 import logging
